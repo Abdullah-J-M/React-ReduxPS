@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./reducers";
 import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
+import thunk from "redux-thunk";
 
 export default function configureStore(initialState) {
   // Adding support for Redux devtools
@@ -11,6 +12,6 @@ export default function configureStore(initialState) {
     rootReducer,
     initialState,
     //the following middleware is important as it warn us if we accidently mutate redux state(safety net)
-    composeEnhancers(applyMiddleware(reduxImmutableStateInvariant()))
+    composeEnhancers(applyMiddleware(thunk, reduxImmutableStateInvariant()))
   );
 }
