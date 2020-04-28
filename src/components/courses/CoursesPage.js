@@ -5,39 +5,14 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 
 class CoursesPage extends React.Component {
-  state = {
-    course: {
-      title: "",
-    },
-  };
-
-  handleChange = (event) => {
-    // Copied course state as we need to keep React state immutable
-    const course = { ...this.state.course, title: event.target.value };
-    this.setState({ course }); // Object shorhand syntax(left == right) as opposed to {course: course}
-  };
-
-  handleSubmit = (event) => {
-    // need to prevent the default behavior of submit so it does post back (reload the page)
-    event.preventDefault();
-    this.props.actions.createCourse(this.state.course);
-  };
-
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <>
         <h2>Courses</h2>
-        <h3>Add Courses</h3>
-        <input
-          type="text"
-          onChange={this.handleChange}
-          value={this.state.course.title}
-        />
-        <input type="submit" value="Save" />
         {this.props.courses.map((course) => (
           <div key={course.title}>{course.title}</div>
         ))}
-      </form>
+      </>
     );
   }
 }
